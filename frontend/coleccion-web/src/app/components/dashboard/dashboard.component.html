@@ -1,0 +1,31 @@
+<section class="hero">
+  <div>
+    <p class="eyebrow">GESTOR DE COLECCIONES</p>
+    <h1>Organiza todo lo que coleccionas.</h1>
+    <p>
+      LEGO, Pokémon Select, figuras de anime, Mattel Brick Shop
+      y cualquier colección que quieras agregar.
+    </p>
+    <a class="button" routerLink="/catalogo">Ver catálogo</a>
+  </div>
+</section>
+
+<h2>Mis colecciones</h2>
+
+<div class="collection-grid">
+  <article class="collection-card" *ngFor="let coleccion of colecciones">
+    <div class="collection-image">
+      <img
+        *ngIf="coleccion.imagen"
+        [src]="coleccion.imagen"
+        [alt]="coleccion.nombre"
+      />
+      <span *ngIf="!coleccion.imagen">🧱</span>
+    </div>
+
+    <div>
+      <h3>{{ coleccion.nombre }}</h3>
+      <p>{{ coleccion.descripcion }}</p>
+    </div>
+  </article>
+</div>

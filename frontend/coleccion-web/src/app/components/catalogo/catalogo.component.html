@@ -1,0 +1,42 @@
+<div class="page-title">
+  <div>
+    <p class="eyebrow">CATÁLOGO</p>
+    <h1>Mis modelos</h1>
+  </div>
+</div>
+
+<div class="product-grid">
+  <article
+    *ngFor="let producto of productos"
+    class="product-card"
+    [ngClass]="claseEstado(producto.estado)"
+  >
+    <div class="product-image">
+      <img
+        [src]="producto.imagenPrincipal"
+        [alt]="producto.nombre"
+      />
+      <span class="status">{{ producto.estado }}</span>
+    </div>
+
+    <div class="product-info">
+      <small>{{ producto.marca }} · {{ producto.escala }}</small>
+      <h3>{{ producto.nombre }}</h3>
+      <p>{{ producto.modelo }}</p>
+
+      <div class="actions">
+        <button (click)="cambiarEstado(producto, 'COMPRADO')">
+          ✓ Tengo
+        </button>
+
+        <button (click)="cambiarEstado(producto, 'POR_COMPRAR')">
+          + Comprar
+        </button>
+
+        <button (click)="cambiarEstado(producto, 'NO_INTERESA')">
+          No quiero
+        </button>
+      </div>
+    </div>
+  </article>
+</div>

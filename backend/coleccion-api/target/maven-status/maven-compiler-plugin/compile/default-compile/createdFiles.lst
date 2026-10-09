@@ -1,0 +1,15 @@
+com\coleccion\entity\Coleccion.class
+com\coleccion\service\CategoriaService.class
+com\coleccion\controller\ColeccionController.class
+com\coleccion\repository\ColeccionRepository.class
+com\coleccion\ColeccionApplication.class
+com\coleccion\entity\Categoria.class
+com\coleccion\service\ColeccionService.class
+com\coleccion\entity\EstadoColeccion.class
+com\coleccion\service\ProductoService.class
+com\coleccion\controller\CategoriaController.class
+com\coleccion\entity\Producto.class
+com\coleccion\config\CorsConfig.class
+com\coleccion\controller\ProductoController.class
+com\coleccion\repository\CategoriaRepository.class
+com\coleccion\repository\ProductoRepository.class

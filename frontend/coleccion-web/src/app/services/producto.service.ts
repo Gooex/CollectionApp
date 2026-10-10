@@ -9,17 +9,13 @@ export class ProductoService {
   private api = 'http://localhost:8080/api';
 
   obtenerProductos(categoriaId?: number): Observable<Producto[]> {
-    const url = categoriaId
-      ? `${this.api}/productos?categoriaId=${categoriaId}`
-      : `${this.api}/productos`;
-
-    return this.http.get<Producto[]>(url);
+    const params = categoriaId ? `?categoriaId=${categoriaId}` : '';
+    return this.http.get<Producto[]>(`${this.api}/productos${params}`);
   }
 
   cambiarEstado(id: number, estado: EstadoColeccion): Observable<Producto> {
     return this.http.put<Producto>(
-      `${this.api}/productos/${id}/estado?estado=${estado}`,
-      {}
+      `${this.api}/productos/${id}/estado?estado=${estado}`, {}
     );
   }
 }

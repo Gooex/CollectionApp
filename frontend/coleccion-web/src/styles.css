@@ -289,3 +289,185 @@ body {
 .detail-card-link:hover { text-decoration:underline; }
 @media (max-width:850px) { .detail-layout { grid-template-columns:1fr; } .detail-main-image { height:clamp(260px, 70vw, 500px); } }
 @media (max-width:520px) { .detail-heading { flex-direction:column; } .panel { padding:15px; } .detail-list > div { grid-template-columns:1fr; gap:4px; } .detail-list dd { text-align:left; } .detail-thumbnails { gap:7px; } .detail-thumb { width:64px; height:64px; } .image-lightbox { padding-inline:12px; } }
+
+/* Botón de modo claro/oscuro en la barra superior */
+.topbar nav {
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 999px;
+  background: #292929;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.theme-toggle:hover {
+  background: #414141;
+  border-color: rgba(255,255,255,.6);
+}
+.theme-toggle:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+/* Tema oscuro global: aplica al catálogo, inicio y ficha del producto */
+html.dark-mode body {
+  background: #0b0d10;
+  color: #e5e7eb;
+}
+html.dark-mode .container {
+  color: #e5e7eb;
+}
+html.dark-mode .catalog-heading h1,
+html.dark-mode .product-info h2,
+html.dark-mode .detail-heading h1,
+html.dark-mode .fact-panel h2,
+html.dark-mode .section-heading h2,
+html.dark-mode .empty-state h2,
+html.dark-mode .hero h1,
+html.dark-mode .hero h2,
+html.dark-mode .collection-card h2,
+html.dark-mode .collection-card h3 {
+  color: #f3f4f6;
+}
+html.dark-mode .hero,
+html.dark-mode .collection-card,
+html.dark-mode .product-card,
+html.dark-mode .filters,
+html.dark-mode .empty-state,
+html.dark-mode .panel,
+html.dark-mode .notice:not(.error-notice) {
+  background: #15191f;
+  color: #e5e7eb;
+  border-color: #303640;
+  box-shadow: 0 5px 20px rgba(0,0,0,.22);
+}
+html.dark-mode .hero {
+  background: linear-gradient(135deg, #171b22, #101318);
+}
+html.dark-mode .catalog-subtitle,
+html.dark-mode .catalog-count,
+html.dark-mode .catalog-count strong,
+html.dark-mode .state-legend,
+html.dark-mode .product-collection,
+html.dark-mode .product-model,
+html.dark-mode .product-info p,
+html.dark-mode .detail-subtitle,
+html.dark-mode .detail-list dt,
+html.dark-mode .gallery-empty,
+html.dark-mode .empty-state p {
+  color: #aab3c0;
+}
+html.dark-mode .filters label {
+  color: #cbd5e1;
+}
+html.dark-mode .filters input,
+html.dark-mode .filters select {
+  background: #0f1217;
+  color: #e5e7eb;
+  border-color: #3a424e;
+}
+html.dark-mode .filters input::placeholder {
+  color: #8993a2;
+}
+html.dark-mode .clear-filters,
+html.dark-mode .actions button {
+  background: #292f38;
+  color: #e5e7eb;
+}
+html.dark-mode .clear-filters:hover,
+html.dark-mode .actions button:hover {
+  background: #39414d;
+}
+html.dark-mode .product-image,
+html.dark-mode .collection-image,
+html.dark-mode .detail-main-image,
+html.dark-mode .box-image,
+html.dark-mode .detail-thumb {
+  background: #0e1116;
+}
+html.dark-mode .status-pill {
+  background: #272e38;
+  color: #f3f4f6;
+}
+html.dark-mode .detail-list > div {
+  border-color: #303640;
+}
+html.dark-mode .purchase-notes {
+  background: #202630;
+  color: #e5e7eb;
+}
+html.dark-mode .detail-back {
+  color: #b5c0cf;
+}
+html.dark-mode .detail-back:hover {
+  color: #fff;
+}
+html.dark-mode .detail-card-link {
+  color: #a5b4fc;
+}
+html.dark-mode .detail-state {
+  background: #3a3014;
+  color: #fde68a;
+}
+html.dark-mode .detail-state.comprado {
+  background: #143323;
+  color: #86efac;
+}
+html.dark-mode .detail-state.por-comprar {
+  background: #3c1b20;
+  color: #fca5a5;
+}
+html.dark-mode .detail-state.no-interesa {
+  background: #29313c;
+  color: #cbd5e1;
+}
+html.dark-mode .product-card.comprado { border-color: #16803d; }
+html.dark-mode .product-card.por-comprar { border-color: #dc2626; }
+html.dark-mode .product-card.pendiente { border-color: #b98b00; }
+html.dark-mode .product-card.no-interesa { border-color: #48515d; }
+html.dark-mode .empty-icon {
+  background: #252c36;
+  color: #e5e7eb;
+}
+html.dark-mode .loading-spinner {
+  border-color: #374151;
+  border-top-color: #e5e7eb;
+}
+html.dark-mode .error-notice {
+  background: #351b20;
+  border-color: #74313b;
+  color: #fecaca;
+}
+html.dark-mode .error-notice p {
+  color: #fecaca;
+}
+html.dark-mode .button {
+  background: #e5e7eb;
+  color: #111827;
+}
+@media (max-width: 650px) {
+  .topbar {
+    height: auto;
+    min-height: 64px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .topbar nav {
+    gap: 12px;
+  }
+}

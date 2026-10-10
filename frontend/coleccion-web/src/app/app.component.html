@@ -4,6 +4,15 @@
   <nav>
     <a routerLink="/">Inicio</a>
     <a routerLink="/catalogo">Catálogo</a>
+    <button
+      class="theme-toggle"
+      type="button"
+      (click)="alternarTema()"
+      [attr.aria-pressed]="modoOscuro"
+      [attr.aria-label]="modoOscuro ? 'Activar modo claro' : 'Activar modo oscuro'">
+      <span aria-hidden="true">{{ modoOscuro ? '☀️' : '🌙' }}</span>
+      {{ modoOscuro ? 'Modo claro' : 'Modo oscuro' }}
+    </button>
   </nav>
 </header>
 

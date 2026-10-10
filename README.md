@@ -113,3 +113,75 @@ Las rutas de imágenes se guardan en PostgreSQL como `/assets/images/products/ni
 ## Comportamiento de los filtros
 
 La búsqueda, colección, categoría y estado se pueden combinar. El estado cambia con los botones y se persiste mediante el endpoint `PUT /api/productos/{id}/estado?estado=...`. Las tarjetas `NO_INTERESA` muestran solo la imagen, el estado y el nombre; no presentan botones de acción.
+# Paso 2: ficha detallada del producto
+
+Este paquete contiene solo los archivos nuevos/modificados para agregar la vista individual del producto, galería, fotografías de caja, zoom, número de modelo y datos de compra.
+
+## 1. Aplicar los archivos
+
+Copia el contenido del ZIP dentro de la carpeta raíz de tu proyecto `coleccion-app`, conservando las rutas y permitiendo combinar los archivos existentes. No reemplaces toda tu carpeta de proyecto.
+
+## 2. Actualizar PostgreSQL antes de arrancar Spring Boot
+
+En DBeaver, selecciona la base `coleccion_db`, abre un editor SQL y ejecuta una sola vez:
+
+`database/migrations/04-ficha-detallada-producto.sql`
+
+La aplicación tiene `spring.jpa.hibernate.ddl-auto=validate`; por eso es necesario agregar las columnas antes de iniciar Spring Boot. Ejecuta el script como el propietario de la tabla o un usuario con permisos ALTER.
+
+## 3. Reiniciar backend y frontend
+
+- Reinicia Spring Boot.
+- Angular puede seguir levantado; si no detecta la ruta nueva, detén `ng serve` y vuelve a iniciarlo.
+- Abre `/catalogo` y pulsa **Ver ficha completa** en una tarjeta. La ruta será `/productos/ID`.
+
+## 4. Agregar imágenes adicionales
+
+Guarda los archivos dentro de `frontend/coleccion-web/src/assets/images/products/`. Registra cada ruta en la tabla `imagen_producto`. Usa `GALERIA` para fotos del producto y `CAJA` para fotos del empaque. Ejemplo (cambia el ID por el ID real):
+
+```sql
+INSERT INTO imagen_producto (url, tipo, orden, producto_id)
+VALUES ('/assets/images/products/nissan-skyline-lateral.jpg', 'GALERIA', 1, 1);
+
+INSERT INTO imagen_producto (url, tipo, orden, producto_id)
+VALUES ('/assets/images/products/nissan-skyline-caja-frente.jpg', 'CAJA', 1, 1);
+```
+
+La imagen principal sigue utilizando `producto.imagen_principal`. Las imágenes adicionales se guardan en `imagen_producto`.
+
+## 5. Datos de compra
+
+Los campos nuevos son `numero_modelo`, `precio_compra`, `fecha_compra`, `lugar_compra` y `notas_compra`. Se muestran en la ficha y pueden actualizarse directamente en PostgreSQL, por ejemplo:
+
+```sql
+UPDATE producto
+SET numero_modelo = 'JBY82',
+    precio_compra = 349.00,
+    fecha_compra = DATE '2026-10-10',
+    lugar_compra = 'Tienda / vendedor',
+    notas_compra = 'Caja en buen estado'
+WHERE id = 1;
+```
+
+Cambia los valores de ejemplo y confirma el ID antes de ejecutar.
+
+## Nota
+
+Este paso agrega la consulta y visualización de las fotografías/datos. La edición de los datos desde un formulario dentro de Angular puede añadirse como una siguiente mejora.
+
+#### Parche: modo oscuro para Mi Colección
+
+Este parche añade un botón en la barra superior para alternar entre modo oscuro y claro.
+La preferencia queda guardada en el navegador (`localStorage`) y se conserva al recargar.
+
+## Instalación
+1. Haz una copia de seguridad de estos archivos en tu proyecto.
+2. Extrae el ZIP en la raíz de tu proyecto y combina las carpetas:
+   - `frontend/coleccion-web/src/app/app.component.html`
+   - `frontend/coleccion-web/src/app/app.component.ts`
+   - `frontend/coleccion-web/src/styles.css`
+3. Si ya hiciste cambios propios en `app.component.html`, `app.component.ts` o `styles.css`, no los sobrescribas sin revisar: integra el botón, los métodos `alternarTema`/`aplicarTema` y los estilos al final de tu archivo CSS.
+4. No necesita cambios en Spring Boot ni en PostgreSQL.
+5. Angular debería recargar automáticamente. Si no, detén y vuelve a iniciar `ng serve`.
+
+El CSS se basa en la hoja de estilos de la versión con catálogo y ficha detallada.

@@ -76,7 +76,7 @@ Estados:
 
 # Cambios de catálogo — Colección App
 
-Este paquete es un **parche** para copiar sobre el proyecto inicial, conservando el resto de los archivos.
+Esto es un **parche** para copiar sobre el proyecto inicial, conservando el resto de los archivos.
 
 ## Archivos incluidos
 

@@ -5,6 +5,7 @@ export interface Producto {
   nombre: string;
   marca?: string;
   modelo?: string;
+  numeroModelo?: string;
   anio?: number;
   escala?: string;
   descripcion?: string;
@@ -14,6 +15,17 @@ export interface Producto {
   categoriaNombre?: string;
   coleccionId?: number;
   coleccionNombre?: string;
+  precioCompra?: number;
+  fechaCompra?: string;
+  lugarCompra?: string;
+  notasCompra?: string;
+}
+
+export interface ImagenProducto {
+  id: number;
+  url: string;
+  tipo: 'GALERIA' | 'CAJA' | string;
+  orden?: number;
 }
 
 export const ESTADOS: { valor: EstadoColeccion; etiqueta: string }[] = [

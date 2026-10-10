@@ -1,0 +1,79 @@
+<section class="detail-page" *ngIf="!cargando && !error && producto as p">
+  <a class="detail-back" routerLink="/catalogo">← Volver al catálogo</a>
+
+  <header class="detail-heading">
+    <div>
+      <p class="eyebrow">{{ p.coleccionNombre || p.marca || 'MI COLECCIÓN' }}<span *ngIf="p.categoriaNombre"> · {{ p.categoriaNombre }}</span></p>
+      <h1>{{ p.nombre }}</h1>
+      <p class="detail-subtitle" *ngIf="p.descripcion">{{ p.descripcion }}</p>
+    </div>
+    <span class="detail-state" [ngClass]="(p.estado || 'PENDIENTE').toLowerCase().replace('_','-')">{{ p.estado === 'COMPRADO' ? 'Comprado' : p.estado === 'POR_COMPRAR' ? 'Por comprar' : p.estado === 'NO_INTERESA' ? 'No interesa' : 'Pendiente' }}</span>
+  </header>
+
+  <div class="detail-layout">
+    <section class="detail-gallery panel">
+      <div class="detail-main-image" (click)="abrirZoom()" role="button" tabindex="0" (keydown.enter)="abrirZoom()" aria-label="Ampliar imagen seleccionada">
+        <img [src]="imagenSeleccionada" [alt]="p.nombre" (error)="imagenFallback($event)" />
+        <span class="zoom-hint">⌕ Ampliar imagen</span>
+      </div>
+      <div class="detail-thumbnails" *ngIf="imagenesGaleria.length > 0 || p.imagenPrincipal">
+        <button type="button" class="detail-thumb" *ngIf="p.imagenPrincipal" [class.selected]="imagenSeleccionada === p.imagenPrincipal" (click)="seleccionarImagen(p.imagenPrincipal)" aria-label="Ver imagen principal">
+          <img [src]="p.imagenPrincipal" [alt]="p.nombre + ' imagen principal'" (error)="imagenFallback($event)" />
+        </button>
+        <button type="button" class="detail-thumb" *ngFor="let imagen of imagenesGaleria" [class.selected]="imagenSeleccionada === imagen.url" (click)="seleccionarImagen(imagen.url)" [attr.aria-label]="'Ver fotografía ' + (imagen.orden || '')">
+          <img [src]="imagen.url" [alt]="p.nombre + ' fotografía'" (error)="imagenFallback($event)" />
+        </button>
+      </div>
+      <p class="gallery-empty" *ngIf="imagenesGaleria.length === 0 && !p.imagenPrincipal">Aún no hay fotografías registradas para este producto.</p>
+    </section>
+
+    <aside class="detail-facts">
+      <section class="panel fact-panel">
+        <p class="eyebrow">IDENTIFICACIÓN</p>
+        <h2>Datos del modelo</h2>
+        <dl class="detail-list">
+          <div><dt>Marca</dt><dd>{{ p.marca || 'Sin registrar' }}</dd></div>
+          <div><dt>Modelo / edición</dt><dd>{{ p.modelo || 'Sin registrar' }}</dd></div>
+          <div><dt>Número de modelo</dt><dd>{{ p.numeroModelo || 'Sin registrar' }}</dd></div>
+          <div><dt>Año</dt><dd>{{ p.anio || 'Sin registrar' }}</dd></div>
+          <div><dt>Escala</dt><dd>{{ p.escala || 'Sin registrar' }}</dd></div>
+        </dl>
+      </section>
+
+      <section class="panel fact-panel">
+        <p class="eyebrow">REGISTRO PERSONAL</p>
+        <h2>Datos de compra</h2>
+        <dl class="detail-list">
+          <div><dt>Estado</dt><dd>{{ p.estado === 'COMPRADO' ? 'Comprado' : p.estado === 'POR_COMPRAR' ? 'Por comprar' : p.estado === 'NO_INTERESA' ? 'No interesa' : 'Pendiente' }}</dd></div>
+          <div><dt>Precio pagado</dt><dd>{{ p.precioCompra != null ? (p.precioCompra | currency:'MXN':'symbol':'1.2-2') : 'Sin registrar' }}</dd></div>
+          <div><dt>Fecha de compra</dt><dd>{{ p.fechaCompra ? (p.fechaCompra | date:'dd/MM/yyyy') : 'Sin registrar' }}</dd></div>
+          <div><dt>Tienda / vendedor</dt><dd>{{ p.lugarCompra || 'Sin registrar' }}</dd></div>
+        </dl>
+        <div class="purchase-notes" *ngIf="p.notasCompra"><strong>Notas</strong><p>{{ p.notasCompra }}</p></div>
+      </section>
+    </aside>
+  </div>
+
+  <section class="panel box-gallery" *ngIf="imagenesCaja.length > 0">
+    <div class="section-heading"><div><p class="eyebrow">EMPAQUE</p><h2>Fotografías de la caja</h2></div><span>{{ imagenesCaja.length }} {{ imagenesCaja.length === 1 ? 'imagen' : 'imágenes' }}</span></div>
+    <div class="box-image-grid">
+      <button type="button" class="box-image" *ngFor="let imagen of imagenesCaja" (click)="abrirZoom(imagen.url)">
+        <img [src]="imagen.url" [alt]="'Caja de ' + p.nombre" (error)="imagenFallback($event)" />
+        <span>⌕ Ampliar</span>
+      </button>
+    </div>
+  </section>
+  <section class="panel box-gallery" *ngIf="imagenesCaja.length === 0">
+    <div class="section-heading"><div><p class="eyebrow">EMPAQUE</p><h2>Fotografías de la caja</h2></div></div>
+    <p class="gallery-empty">Todavía no se han agregado imágenes del empaque. Cuando las registres con tipo <code>CAJA</code>, aparecerán aquí.</p>
+  </section>
+</section>
+
+<div *ngIf="cargando" class="empty-state"><div class="loading-spinner"></div><h2>Cargando ficha del producto...</h2></div>
+<div *ngIf="!cargando && error" class="notice error-notice"><strong>No se pudo abrir la ficha</strong><p>{{ error }}</p><a routerLink="/catalogo">Volver al catálogo</a></div>
+
+<div class="image-lightbox" *ngIf="imagenZoom" (click)="cerrarZoom()" role="dialog" aria-modal="true" aria-label="Vista ampliada de imagen">
+  <button type="button" class="lightbox-close" (click)="$event.stopPropagation(); cerrarZoom()" aria-label="Cerrar imagen">×</button>
+  <img [src]="imagenZoom" [alt]="producto?.nombre || 'Imagen ampliada'" (click)="$event.stopPropagation()" (error)="imagenFallback($event)" />
+  <p>Haz clic fuera de la imagen o presiona Esc para cerrar</p>
+</div>

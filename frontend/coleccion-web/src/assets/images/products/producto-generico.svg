@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" role="img" aria-label="Producto de colección">
-<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eef2f7"/><stop offset="1" stop-color="#dbe3ee"/></linearGradient><linearGradient id="car" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#94a3b8"/><stop offset="1" stop-color="#64748b"/></linearGradient></defs>
-<rect width="640" height="440" rx="24" fill="url(#bg)"/><circle cx="510" cy="84" r="70" fill="#fff" opacity=".25"/><ellipse cx="320" cy="340" rx="220" ry="28" fill="#1f2937" opacity=".14"/>
-<rect x="210" y="115" width="220" height="205" rx="18" fill="url(#car)" stroke="#64748b" stroke-width="5"/><path d="M245 150 H395 V285 H245Z" fill="#e2e8f0" stroke="#64748b" stroke-width="4"/><path d="M280 215 L320 175 L360 215 L320 255Z" fill="#94a3b8"/>
-<text x="34" y="45" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#243044" opacity=".75">COLECCIÓN · MODELO DE REFERENCIA</text>
-<text x="34" y="405" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#243044">Producto de colección</text></svg>

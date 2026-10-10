@@ -64,6 +64,7 @@
         <p class="product-collection">{{ producto.coleccionNombre || producto.marca || 'Coleccionable' }}<span *ngIf="producto.categoriaNombre"> · {{ producto.categoriaNombre }}</span></p>
         <h2>{{ producto.nombre }}</h2>
         <p class="product-model" *ngIf="producto.modelo">{{ producto.modelo }}<span *ngIf="producto.escala"> · {{ producto.escala }}</span></p>
+        <a class="detail-card-link" [routerLink]="['/productos', producto.id]">Ver ficha completa <span aria-hidden="true">→</span></a>
         <div class="product-actions">
           <button type="button" class="action-have" [disabled]="actualizandoId === producto.id" (click)="cambiarEstado(producto, 'COMPRADO')">✓ Comprado</button>
           <button type="button" class="action-want" [disabled]="actualizandoId === producto.id" (click)="cambiarEstado(producto, 'POR_COMPRAR')">＋ Por comprar</button>
@@ -72,7 +73,7 @@
         </div>
       </div>
       <ng-template #noInteresaInfo>
-        <div class="product-info uninterested-info"><h2>{{ producto.nombre }}</h2></div>
+        <div class="product-info uninterested-info"><h2>{{ producto.nombre }}</h2><a class="detail-card-link" [routerLink]="['/productos', producto.id]">Ver ficha completa <span aria-hidden="true">→</span></a></div>
       </ng-template>
     </article>
   </section>

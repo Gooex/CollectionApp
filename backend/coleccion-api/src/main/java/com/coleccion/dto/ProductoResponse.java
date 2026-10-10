@@ -2,12 +2,15 @@ package com.coleccion.dto;
 
 import com.coleccion.entity.EstadoColeccion;
 import com.coleccion.entity.Producto;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public record ProductoResponse(
         Long id, String nombre, String marca, String modelo, Integer anio,
         String escala, String descripcion, String imagenPrincipal,
         EstadoColeccion estado, Long categoriaId, String categoriaNombre,
-        Long coleccionId, String coleccionNombre) {
+        Long coleccionId, String coleccionNombre, String numeroModelo,
+        BigDecimal precioCompra, LocalDate fechaCompra, String lugarCompra, String notasCompra) {
 
     public static ProductoResponse desde(Producto p) {
         var categoria = p.getCategoria();
@@ -18,6 +21,7 @@ public record ProductoResponse(
                 categoria == null ? null : categoria.getId(),
                 categoria == null ? null : categoria.getNombre(),
                 coleccion == null ? null : coleccion.getId(),
-                coleccion == null ? null : coleccion.getNombre());
+                coleccion == null ? null : coleccion.getNombre(), p.getNumeroModelo(),
+                p.getPrecioCompra(), p.getFechaCompra(), p.getLugarCompra(), p.getNotasCompra());
     }
 }

@@ -10,6 +10,7 @@ com\coleccion\service\ProductoService.class
 com\coleccion\controller\CategoriaController.class
 com\coleccion\entity\Producto.class
 com\coleccion\config\CorsConfig.class
+com\coleccion\dto\ProductoResponse.class
 com\coleccion\controller\ProductoController.class
 com\coleccion\repository\CategoriaRepository.class
 com\coleccion\repository\ProductoRepository.class

@@ -3,6 +3,7 @@ J:\Proyecto App\coleccion-app\backend\coleccion-api\src\main\java\com\coleccion\
 J:\Proyecto App\coleccion-app\backend\coleccion-api\src\main\java\com\coleccion\controller\CategoriaController.java
 J:\Proyecto App\coleccion-app\backend\coleccion-api\src\main\java\com\coleccion\controller\ColeccionController.java
 J:\Proyecto App\coleccion-app\backend\coleccion-api\src\main\java\com\coleccion\controller\ProductoController.java
+J:\Proyecto App\coleccion-app\backend\coleccion-api\src\main\java\com\coleccion\dto\ProductoResponse.java
 J:\Proyecto App\coleccion-app\backend\coleccion-api\src\main\java\com\coleccion\entity\Categoria.java
 J:\Proyecto App\coleccion-app\backend\coleccion-api\src\main\java\com\coleccion\entity\Coleccion.java
 J:\Proyecto App\coleccion-app\backend\coleccion-api\src\main\java\com\coleccion\entity\EstadoColeccion.java

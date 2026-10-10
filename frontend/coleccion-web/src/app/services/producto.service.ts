@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Producto, EstadoColeccion } from '../models/producto.model';
+import { Producto, EstadoColeccion, ImagenProducto } from '../models/producto.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
@@ -11,6 +11,14 @@ export class ProductoService {
   obtenerProductos(categoriaId?: number): Observable<Producto[]> {
     const params = categoriaId ? `?categoriaId=${categoriaId}` : '';
     return this.http.get<Producto[]>(`${this.api}/productos${params}`);
+  }
+
+  obtenerProducto(id: number): Observable<Producto> {
+    return this.http.get<Producto>(`${this.api}/productos/${id}`);
+  }
+
+  obtenerImagenes(id: number): Observable<ImagenProducto[]> {
+    return this.http.get<ImagenProducto[]>(`${this.api}/productos/${id}/imagenes`);
   }
 
   cambiarEstado(id: number, estado: EstadoColeccion): Observable<Producto> {

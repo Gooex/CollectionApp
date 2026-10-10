@@ -2,6 +2,8 @@ package com.coleccion.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "producto")
@@ -25,6 +27,21 @@ public class Producto {
     @Column(name = "imagen_principal")
     private String imagenPrincipal;
 
+    @Column(name = "numero_modelo", length = 100)
+    private String numeroModelo;
+
+    @Column(name = "precio_compra", precision = 12, scale = 2)
+    private BigDecimal precioCompra;
+
+    @Column(name = "fecha_compra")
+    private LocalDate fechaCompra;
+
+    @Column(name = "lugar_compra", length = 200)
+    private String lugarCompra;
+
+    @Column(name = "notas_compra", length = 1000)
+    private String notasCompra;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private EstadoColeccion estado;
@@ -42,6 +59,11 @@ public class Producto {
     public String getEscala() { return escala; }
     public String getDescripcion() { return descripcion; }
     public String getImagenPrincipal() { return imagenPrincipal; }
+    public String getNumeroModelo() { return numeroModelo; }
+    public BigDecimal getPrecioCompra() { return precioCompra; }
+    public LocalDate getFechaCompra() { return fechaCompra; }
+    public String getLugarCompra() { return lugarCompra; }
+    public String getNotasCompra() { return notasCompra; }
     public EstadoColeccion getEstado() { return estado; }
     public Categoria getCategoria() { return categoria; }
 
@@ -53,6 +75,11 @@ public class Producto {
     public void setEscala(String escala) { this.escala = escala; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
     public void setImagenPrincipal(String imagenPrincipal) { this.imagenPrincipal = imagenPrincipal; }
+    public void setNumeroModelo(String numeroModelo) { this.numeroModelo = numeroModelo; }
+    public void setPrecioCompra(BigDecimal precioCompra) { this.precioCompra = precioCompra; }
+    public void setFechaCompra(LocalDate fechaCompra) { this.fechaCompra = fechaCompra; }
+    public void setLugarCompra(String lugarCompra) { this.lugarCompra = lugarCompra; }
+    public void setNotasCompra(String notasCompra) { this.notasCompra = notasCompra; }
     public void setEstado(EstadoColeccion estado) { this.estado = estado; }
     public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 }

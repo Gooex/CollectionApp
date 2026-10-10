@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { ProductoService } from '../../services/producto.service';
 import { ColeccionService } from '../../services/coleccion.service';
@@ -12,7 +13,7 @@ import { Categoria } from '../../models/categoria.model';
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './catalogo.component.html'
 })
 export class CatalogoComponent implements OnInit {
